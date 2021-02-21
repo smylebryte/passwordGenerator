@@ -1,67 +1,64 @@
 // Assignment Code
-let passwordLength = ;
-let uppercase = ["A", "B", "C"]
-let lowercase = ["a", "b", "c"]
-let numeric = ["1", "2", "3"]
-let specialCharacters = ["@", "!", "$"]
-let finalPassword = ""
 
-function generatePassword (
-  passwordLength;
-  uppercase;
-  lowercase;
-  numeric;
-  specialCharacters;
-) {
-
-}
 
 var generateBtn = document.querySelector("#generate");
 
-// User clicks button
-generateBtn.addEventListener("click", writePassword);
+function generatePassword (
+    passwordLength,
+    includeSpecialCharacters,
+    includeLowerCase,
+    includeUpperCase,
+    includeNumeric
+    ) {
 
-// Window prompt asks user what they want for their password
+    let characterOptions = [];
 
+    let lowerCase = ["a", "b", "c", "d"];
+    let upperCase = ["A", "B", "C", "D"];
+    let specialCharacters = ["!", "@", "#", "$"];
 
-// randomizer function
-for (let i=0; i<passwordLength; i++) {
-  finalPassword
+    if (includeSpecialCharacters) {
+        characterOptions = characterOptions.concat(specialCharacters);
+    }
 
+    if (includeUpperCase) {
+        characterOptions = characterOptions.concat(upperCase);
+    }
 
-  return finalPassword
+    let finalPassword = ""
+
+    for (i=0; i<passwordLength; i++)  {
+        let randomIndex = Math.floor(Math.random() * characterOptions.length);
+        finalPassword += characterOptions[randomIndex];
+
+    }
+
+    return finalPassword
 }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-// Password output
-
-
-
-
+    let wasAnythingSelected = false;
+    let passwordLength = window.prompt ("Enter length:");
+    let includeSpecialCharacters = true;
+    let includeLowerCase = true;
+    let includeUpperCase = true;
+    let includeNumeric = true;
 
 
 
+    var password = generatePassword(
+        passwordLength,
+        includeSpecialCharacters,
+        includeLowerCase,
+        includeUpperCase,
+        includeNumeric
+    );
+    var passwordText = document.querySelector("#password");
 
+    passwordText.value = password;
 
+}
 
-// // Assignment Code
-// var generateBtn = document.querySelector("#generate");
-// function generatePassword () {
-
-// }
-
-// // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
-
-//   passwordText.value = password;
-
-// }
-
-// // Add event listener to generate button
-// generateBtn.addEventListener("click", writePassword);
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
